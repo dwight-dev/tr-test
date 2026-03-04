@@ -1,7 +1,11 @@
 {
-  "name": "cookie-test",
+  "name": "cookie-test-lab-2026",
   "version": "1.0.0",
-  "scripts": { "start": "node $FILENAME" },
+  "description": "3P Cookie Test Lab",
+  "main": "hub-server.js",
+  "scripts": {
+    "start": "node $FILENAME"
+  },
   "dependencies": {
     "express": "^4.18.2",
     "cookie-parser": "^1.4.6"
