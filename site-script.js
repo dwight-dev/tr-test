@@ -15,8 +15,8 @@ app.get('/', (req, res) => {
     const host = req.headers.host;
     const peerUrl = process.env.PEER_URL; 
 
-    if (!req.cookies.LOCAL_ID) {
-        res.cookie("LOCAL_ID", "ID-FROM-" + host.split('.')[0].toUpperCase(), { 
+    if (!req.cookies.GLOBAL_ID) {
+        res.cookie("GLOBAL_ID", "ID-FROM-" + host.split('.')[0].toUpperCase(), { 
             httpOnly: true, 
             secure: true, 
             sameSite: "none" 
@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/get_id_sync', (req, res) => {
-    const cookie = req.cookies.LOCAL_ID;
+    const cookie = req.cookies.GLOBAL_ID;
     res.json({ global_id: cookie || "BROWSER_BLOCKED_COOKIE" });
 });
 

@@ -7,14 +7,14 @@ const HUB_URL = process.env.HUB_URL;
 
 app.get('/', (req, res) => {
     const host = req.headers.host;
-    const localId = req.cookies.LOCAL_ID;
+    const globalId = req.cookies.GLOBAL_ID;
 
-    if (req.query.id && !localId) {
-        res.cookie("LOCAL_ID", req.query.id, { httpOnly: true, secure: true, sameSite: "lax" });
+    if (req.query.id && !globalId) {
+        res.cookie("GLOBAL_ID", req.query.id, { httpOnly: true, secure: true, sameSite: "lax" });
         return res.redirect('/'); 
     }
 
-    if (!localId) {
+    if (!globalId) {
         return res.redirect(`${HUB_URL}/sync?origin=https://${host}`);
     }
 
@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
             <h1>Redirect Test (Case 1)</h1>
             <h2>Domain: ${host}</h2>
             <div style="padding:20px; border:2px solid green; background:white;">
-                Synced Identity: <b style="font-size:1.5em; color:green;">${localId}</b>
+                Synced Identity: <b style="font-size:1.5em; color:green;">${globalId}</b>
             </div>
             <p>Verification: Visit other c1-x site to see if the ID matches.</p>
         </body>
