@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
             <div style="padding:20px; border:2px solid green; background:white;">
                 Synced Identity: <b style="font-size:1.5em; color:green;">${localId}</b>
             </div>
-            <p>Verification: Visit Site 1B to see if the ID matches.</p>
+            <p>Verification: Visit other c1-x site to see if the ID matches.</p>
         </body>
     `);
 });
