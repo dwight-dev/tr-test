@@ -5,7 +5,7 @@ const app = express();
 app.use(cookieParser());
 
 app.get('/sync', (req, res) => {
-    let globalId = req.cookies.GLOBAL_ID || "UID-" + Math.floor(Math.random() * 9999);
+    let globalId = req.cookies.GLOBAL_ID || "ID-" + Math.floor(Math.random() * 9999);
 
     res.cookie("GLOBAL_ID", globalId, {
         httpOnly: false,
@@ -22,13 +22,22 @@ app.get('/sync', (req, res) => {
 });
 
 app.get('/pure_sync', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
+    res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     res.setHeader('Access-Control-Allow-Credentials', 'true');
 
-    const globalId = req.cookies.GLOBAL_ID;
+    let globalId = req.cookies.GLOBAL_ID;
 
     if (!globalId) {
-        return res.json({ id: "COOKIE_UNKNOWN" });
+        globalId = "ID-" + Math.floor(Math.random() * 9999);
+        
+        // This sets the cookie on the HUB's domain in the background
+        res.cookie("GLOBAL_ID", globalId, {
+            httpOnly: false,
+            secure: true,
+            sameSite: "none",
+            maxAge: 3600000,
+            path: "/"
+        });
     }
 
     res.json({ id: globalId });
