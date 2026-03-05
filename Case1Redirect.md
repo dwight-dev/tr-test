@@ -2,9 +2,9 @@
 sequenceDiagram
     autonumber
     participant U as User Browser
-    participant A as domain-a.com
-    participant B as domain-b.com
-    participant H as hub.com
+    participant A as c1-A
+    participant B as c1-B
+    participant H as HUB
 
     Note over U, H: Step 1: User visits domain-a.com for the first time
     U->>A: GET /index.html (No Cookie)
