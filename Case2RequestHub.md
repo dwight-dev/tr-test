@@ -38,8 +38,10 @@ sequenceDiagram
     Note over U, H: THE NEGATIVE ALTERNATIVE
 
     rect rgb(255, 235, 235)
-        Note over U, H: ❌ Negative Case (Incognito Mode)
-        U->>H: fetch('/pure_sync') [HUB COOKIES STRIPPED]
-        H-->>U: JSON { id: "COOKIE_UNKNOWN" }
-        Note over B: Result: Site B remains anonymous
+        Note over U, H: ❌ NEGATIVE CASE (Incognito Mode)
+        U->>H: fetch('/pure_sync') [BROWSER STRIPS HUB COOKIE]
+        H->>H: Sees NO cookie. Generates NEW "ID-77"
+        H-->>U: JSON {id: "ID-77"} + Set-Cookie (which browser may ignore)
+        U->>U: JS saves "ID-77" to local Jar
+        Note over B: Site B = ID-77 (Sync Failed!)
     end
