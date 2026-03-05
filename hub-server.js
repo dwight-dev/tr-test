@@ -21,5 +21,18 @@ app.get('/sync', (req, res) => {
     res.redirect(`${origin}?id=${globalId}`);
 });
 
+app.get('/pure_sync', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+
+    const globalId = req.cookies.GLOBAL_ID;
+
+    if (!globalId) {
+        return res.json({ id: "COOKIE_UNKNOWN" });
+    }
+
+    res.json({ id: globalId });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Hub running on ${PORT}`));
