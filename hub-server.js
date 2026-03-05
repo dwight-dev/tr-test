@@ -8,7 +8,7 @@ app.get('/sync', (req, res) => {
     let globalId = req.cookies.GLOBAL_ID || "UID-" + Math.floor(Math.random() * 9999);
 
     res.cookie("GLOBAL_ID", globalId, {
-        httpOnly: true,
+        httpOnly: false,
         secure: true,
         sameSite: "none",
         maxAge: 3600000, 

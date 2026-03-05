@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
     const globalId = req.cookies.GLOBAL_ID;
 
     if (req.query.id && !globalId) {
-        res.cookie("GLOBAL_ID", req.query.id, { httpOnly: true, secure: true, sameSite: "lax" });
+        res.cookie("GLOBAL_ID", req.query.id, { httpOnly: false, secure: true, sameSite: "lax" });
         return res.redirect('/'); 
     }
 
